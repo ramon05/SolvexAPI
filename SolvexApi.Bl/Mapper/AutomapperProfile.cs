@@ -12,6 +12,9 @@ namespace SolvexApi.Bl.Mapper
 		public AutomapperProfile()
 		{
 			CreateMap<Document, DocumentDto>().ReverseMap();
+			CreateMap<WorkShop, WorkShopDto>().ReverseMap();
+			CreateMap<WorkShopDay, WorkShopDayDto>().ReverseMap();
+			CreateMap<WorkShopMember, WorkShopMemberDto>().ReverseMap();
 		}
 	}
 }

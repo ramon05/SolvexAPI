@@ -26,26 +26,9 @@ namespace SolvexAPI.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
-			//var document = from d in _documentService.GetAll()
-			//			select new DocumentDto()
-			//			{
-			//				Id = d.Id,
-			//				Deleted = d.Deleted,
-			//				FileName = d.FileName,
-			//				OriginalName = d.OriginalName,
-			//				ContentType = d.ContentType,
-			//				DeletedDate = d.DeletedDate,
-			//				CreatedDate = d.CreatedDate,
-			//				UpdatedDate = d.UpdatedDate,
-			//				CreatedBy = d.CreatedBy,
-			//				DeletedBy = d.DeletedBy,
-			//				UpdatedBy = d.UpdatedBy
-			//			};
-
-			//return document;
-			var documents = _documentService.GetAll();
-			var documentDtos = _mapper.Map<IEnumerable<DocumentDto>>(documents);
-			return Ok(documentDtos);
+            var documents = _documentService.GetAll();
+            var documentDtos = _mapper.Map<IEnumerable<DocumentDto>>(documents);
+            return Ok(documentDtos);
 
 		}
 

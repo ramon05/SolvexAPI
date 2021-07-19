@@ -16,6 +16,10 @@ using SolvexApi.Model.Repositories;
 using SolvexApi.Model.Interfaces;
 using SolvexApi.Services;
 using AutoMapper;
+using SolvexApi.Bl.Mapper;
+using SolvexApi.Services.WorkShops;
+using SolvexApi.Services.WorkShopDays;
+using SolvexApi.Services.WorkShopMembers;
 
 namespace SolvexAPI
 {
@@ -31,7 +35,7 @@ namespace SolvexAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			services.AddAutoMapper(typeof(AutomapperProfile));
 
 			services.AddControllers();
 			services.AddDbContext<WorkShopDbContext>(options =>
@@ -40,6 +44,9 @@ namespace SolvexAPI
 			});
 
 			services.AddTransient<IDocumentService, DocumentService>();
+			services.AddTransient<IWorkShopService, WorkShopService>();
+			services.AddTransient<IWorkShopDayService, WorkShopDayService>();
+			services.AddTransient<IWorkShopMemberService, WorkShopMemberService>();
 			services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
 			
