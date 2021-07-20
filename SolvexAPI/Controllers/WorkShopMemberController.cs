@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Interfaces;
+using SolvexApi.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,19 +16,19 @@ namespace SolvexAPI.Controllers
     [ApiController]
     public class WorkShopMemberController : ControllerBase
     {
-        private readonly IWorkShopMemberService _workShopMemberService;
+        private readonly IWorkShopMemberRepository _workShopMemberRepository;
         private readonly IMapper _mapper;
 
-        public WorkShopMemberController(IWorkShopMemberService workShopMemberService, IMapper mapper)
+        public WorkShopMemberController(IWorkShopMemberRepository workShopMemberRepository, IMapper mapper)
         {
-            _workShopMemberService = workShopMemberService;
+            _workShopMemberRepository = workShopMemberRepository;
             _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var workShopMember = _workShopMemberService.GetAll();
+            var workShopMember = _workShopMemberRepository.Query();
             var workShopMemberDtos = _mapper.Map<IEnumerable<WorkShopMemberDto>>(workShopMember);
             return Ok(workShopMemberDtos);
         }
@@ -35,7 +36,7 @@ namespace SolvexAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var workShopMemberResult = _workShopMemberService.GetById(id);
+            var workShopMemberResult = _workShopMemberRepository.Get(id);
             var workShopMemberDto = _mapper.Map<WorkShopMemberDto>(workShopMemberResult);
             return Ok(workShopMemberDto);
         }
@@ -49,7 +50,7 @@ namespace SolvexAPI.Controllers
             }
 
             var workShopMemberResult = _mapper.Map<WorkShopMember>(workShopMemberDto);
-            await _workShopMemberService.Create(workShopMemberResult);
+            await _workShopMemberRepository.Add(workShopMemberResult);
             return Ok(workShopMemberResult);
         }
 
@@ -59,14 +60,14 @@ namespace SolvexAPI.Controllers
             var workShopMemberResult = _mapper.Map<WorkShopMember>(workShopMemberDto);
             workShopMemberResult.Id = id;
 
-            await _workShopMemberService.Update(workShopMemberResult);
+            await _workShopMemberRepository.Update(workShopMemberResult);
             return Ok(workShopMemberResult);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var workShopMemberResult = _workShopMemberService.Delete(id);
+            var workShopMemberResult = _workShopMemberRepository.Delete(id);
 
             return Ok(workShopMemberResult);
         }

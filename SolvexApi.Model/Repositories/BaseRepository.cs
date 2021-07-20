@@ -10,46 +10,48 @@ using System.Threading.Tasks;
 
 namespace SolvexApi.Model.Repositories
 {
-	public class BaseRepository<T> : IRepository<T> where T : BaseEntity
+	public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IBase
 	{
-		private readonly WorkShopDbContext _workShopDbContext;
-		private DbSet<T> _entities;
+		private readonly IDbContext _context;
+		private DbSet<T> _set;
 
-		public BaseRepository(WorkShopDbContext workShopDbContext)
+		public BaseRepository(IDbContext context)
 		{
-			_workShopDbContext = workShopDbContext;
-			_entities = workShopDbContext.Set<T>();
+			_context = context;
+			_set = context.Set<T>();
 		}
 
-		public async Task<T> Create(T entity)
+		public IQueryable<T> Query()
 		{
-			_entities.Add(entity);
-		    await _workShopDbContext.SaveChangesAsync();
-			return entity;
+			return _set.AsQueryable();
+		}
+
+		public async Task<T> Add(T entity)
+		{
+			var result = await _set.AddAsync(entity);
+			await _context.SaveChangesAsync();
+
+			return result.Entity;
 		}
 
 		public async Task<T> Delete(int id)
 		{
-			T entity = await GetById(id);
-			_entities.Remove(entity);
-			_workShopDbContext.SaveChanges();
+			T entity = await Get(id);
+			_set.Remove(entity);
+			await _context.SaveChangesAsync();
 			return entity;
 		}
 
-		public  IEnumerable<T> GetAll()
+		public async Task<T> Get(int id)
 		{
-			return _entities.AsEnumerable();
-		}
-
-		public async Task<T> GetById(int id)
-		{
-			return await _entities.FindAsync(id);
+			var entity = await _set.Where(x => x.Id == id).FirstOrDefaultAsync();
+			return entity;
 		}
 
 		public async Task<T> Update(T entity)
 		{
-			_entities.Update(entity);
-			await _workShopDbContext.SaveChangesAsync();
+			_context.Entry(entity).State = EntityState.Modified;
+			await _context.SaveChangesAsync();
 			return entity;
 		}
 	}

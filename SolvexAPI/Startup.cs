@@ -14,12 +14,9 @@ using SolvexApi.Model.DataContext;
 using Microsoft.EntityFrameworkCore;
 using SolvexApi.Model.Repositories;
 using SolvexApi.Model.Interfaces;
-using SolvexApi.Services;
 using AutoMapper;
 using SolvexApi.Bl.Mapper;
-using SolvexApi.Services.WorkShops;
-using SolvexApi.Services.WorkShopDays;
-using SolvexApi.Services.WorkShopMembers;
+using SolvexApi.Model.IoC;
 
 namespace SolvexAPI
 {
@@ -43,11 +40,8 @@ namespace SolvexAPI
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 			});
 
-			services.AddTransient<IDocumentService, DocumentService>();
-			services.AddTransient<IWorkShopService, WorkShopService>();
-			services.AddTransient<IWorkShopDayService, WorkShopDayService>();
-			services.AddTransient<IWorkShopMemberService, WorkShopMemberService>();
-			services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+			services.AddModelRegistry();
+			
 
 			
 			

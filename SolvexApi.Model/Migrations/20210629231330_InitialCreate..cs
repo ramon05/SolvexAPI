@@ -8,7 +8,7 @@ namespace SolvexApi.Model.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Document",
+                name: "Documents",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -30,7 +30,7 @@ namespace SolvexApi.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkShop",
+                name: "WorkShops",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -54,7 +54,7 @@ namespace SolvexApi.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkShopMembers",
+                name: "Members",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -82,13 +82,13 @@ namespace SolvexApi.Model.Migrations
                     table.ForeignKey(
                         name: "FK_WorkShopMembers_Document_PhotoId",
                         column: x => x.PhotoId,
-                        principalTable: "Document",
+                        principalTable: "Documents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkShopDay",
+                name: "WorkShopDays",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -113,35 +113,35 @@ namespace SolvexApi.Model.Migrations
                     table.ForeignKey(
                         name: "FK_WorkShopDay_WorkShop_WorkShopId",
                         column: x => x.WorkShopId,
-                        principalTable: "WorkShop",
+                        principalTable: "WorkShops",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkShopDay_WorkShopId",
-                table: "WorkShopDay",
+                table: "WorkShopDays",
                 column: "WorkShopId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkShopMembers_PhotoId",
-                table: "WorkShopMembers",
+                table: "Members",
                 column: "PhotoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WorkShopDay");
+                name: "WorkShopDays");
 
             migrationBuilder.DropTable(
-                name: "WorkShopMembers");
+                name: "Members");
 
             migrationBuilder.DropTable(
-                name: "WorkShop");
+                name: "WorkShops");
 
             migrationBuilder.DropTable(
-                name: "Document");
+                name: "Documents");
         }
     }
 }

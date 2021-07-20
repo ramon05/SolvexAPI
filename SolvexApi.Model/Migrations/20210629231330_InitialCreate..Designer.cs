@@ -21,7 +21,7 @@ namespace SolvexApi.Model.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.Document", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.Documents", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,10 +60,10 @@ namespace SolvexApi.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Document");
+                    b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShop", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShops", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,10 +108,10 @@ namespace SolvexApi.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WorkShop");
+                    b.ToTable("WorkShops");
                 });
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopDay", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopDays", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,10 +161,10 @@ namespace SolvexApi.Model.Migrations
 
                     b.HasIndex("WorkShopId");
 
-                    b.ToTable("WorkShopDay");
+                    b.ToTable("WorkShopDays");
                 });
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopMember", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -223,19 +223,19 @@ namespace SolvexApi.Model.Migrations
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("WorkShopMembers");
+                    b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopDay", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopDays", b =>
                 {
-                    b.HasOne("SolvexApi.Model.Entities.WorkShop", null)
+                    b.HasOne("SolvexApi.Model.Entities.WorkShops", null)
                         .WithMany("Days")
                         .HasForeignKey("WorkShopId");
                 });
 
-            modelBuilder.Entity("SolvexApi.Model.Entities.WorkShopMember", b =>
+            modelBuilder.Entity("SolvexApi.Model.Entities.Member", b =>
                 {
-                    b.HasOne("SolvexApi.Model.Entities.Document", "Photo")
+                    b.HasOne("SolvexApi.Model.Entities.Documents", "Photo")
                         .WithMany()
                         .HasForeignKey("PhotoId");
                 });

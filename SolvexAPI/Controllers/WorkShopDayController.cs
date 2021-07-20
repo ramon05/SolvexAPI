@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Interfaces;
+using SolvexApi.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,18 @@ namespace SolvexAPI.Controllers
     [ApiController]
     public class WorkShopDayController : ControllerBase
     {
-        private readonly IWorkShopDayService _workShopDayService;
+        private readonly IWorkShopDayRepository _workShopDayRepository;
         private readonly IMapper _mapper;
-        public WorkShopDayController(IWorkShopDayService workShopDayService, IMapper mapper)
+        public WorkShopDayController(IWorkShopDayRepository workShopDayRepository, IMapper mapper)
         {
-            _workShopDayService = workShopDayService;
+            _workShopDayRepository = workShopDayRepository;
             _mapper = mapper;
         }
 
 		[HttpGet]
 		public IActionResult Get()
 		{
-			var workShopDay = _workShopDayService.GetAll();
+			var workShopDay = _workShopDayRepository.Query();
 			var documentDtos = _mapper.Map<IEnumerable<WorkShopDayDto>>(workShopDay);
 			return Ok(documentDtos);
 
@@ -35,7 +36,7 @@ namespace SolvexAPI.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(int id)
 		{
-			var workShopDayResult = _workShopDayService.GetById(id);
+			var workShopDayResult = _workShopDayRepository.Get(id);
 			var workShopDayDto = _mapper.Map<WorkShopDayDto>(workShopDayResult);
 			return Ok(workShopDayDto);
 		}
@@ -49,7 +50,7 @@ namespace SolvexAPI.Controllers
 			}
 
 			var workShopDayResult = _mapper.Map<WorkShopDay>(workShopDayDto);
-			await _workShopDayService.Create(workShopDayResult);
+			await _workShopDayRepository.Add(workShopDayResult);
 			return Ok(workShopDayResult);
 		}
 
@@ -59,14 +60,14 @@ namespace SolvexAPI.Controllers
 			var workShopDayResult = _mapper.Map<WorkShopDay>(workShopDayDto);
 			workShopDayResult.Id = id;
 
-			await _workShopDayService.Update(workShopDayResult);
+			await _workShopDayRepository.Update(workShopDayResult);
 			return Ok(workShopDayResult);
 		}
 
 		[HttpDelete]
 		public IActionResult Delete(int id)
 		{
-			var workShopDayResult =  _workShopDayService.Delete(id);
+			var workShopDayResult =  _workShopDayRepository.Delete(id);
 
 			return Ok(workShopDayResult);
 		}

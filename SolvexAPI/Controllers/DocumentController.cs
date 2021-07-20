@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Interfaces;
+using SolvexApi.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,18 @@ namespace SolvexAPI.Controllers
 	[ApiController]
 	public class DocumentController : ControllerBase
 	{
-		private readonly IDocumentService _documentService;
+		private readonly IDocumentRepository _documentRepository;
 		private readonly IMapper _mapper;
 
-		public DocumentController(IDocumentService documentService, IMapper mapper)
+		public DocumentController(IDocumentRepository documentService, IMapper mapper)
 		{
-			_documentService = documentService;
+			_documentRepository = documentService;
 			_mapper = mapper;
 		}
 		[HttpGet]
 		public IActionResult Get()
 		{
-            var documents = _documentService.GetAll();
+            var documents = _documentRepository.Query();
             var documentDtos = _mapper.Map<IEnumerable<DocumentDto>>(documents);
             return Ok(documentDtos);
 
@@ -35,7 +36,7 @@ namespace SolvexAPI.Controllers
 		[HttpGet("{id}")]
 		public async Task<IActionResult> Get(int id)
 		{
-			var documentResult = await _documentService.GetById(id);
+			var documentResult = await _documentRepository.Get(id);
 			var documentDto = _mapper.Map<DocumentDto>(documentResult);
 			return Ok(documentDto);
 		}
@@ -49,7 +50,7 @@ namespace SolvexAPI.Controllers
 			}
 
 			var documentResult = _mapper.Map<Document>(documentDto);
-			await _documentService.Create(documentResult);
+			await _documentRepository.Add(documentResult);
 			return Ok(documentResult);
 		}
 
@@ -59,14 +60,14 @@ namespace SolvexAPI.Controllers
 			var documentResult = _mapper.Map<Document>(documentDto);
 			documentResult.Id = id;
 
-			await _documentService.Update(documentResult);
+			await _documentRepository.Update(documentResult);
 			return Ok(documentResult);
 		}
 
 		[HttpDelete]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var documentResult = await _documentService.Delete(id);
+			var documentResult = await _documentRepository.Delete(id);
 
 			return Ok(documentResult);
 		}
