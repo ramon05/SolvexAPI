@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace SolvexApi.Model.Repositories
 {
-	public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IBase
+	public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, IBase
 	{
 		private readonly IDbContext _context;
-		private DbSet<T> _set;
+		private DbSet<TEntity> _set;
 
 		public BaseRepository(IDbContext context)
 		{
 			_context = context;
-			_set = context.Set<T>();
+			_set = context.Set<TEntity>();
 		}
 
-		public IQueryable<T> Query()
+		public IQueryable<TEntity> Query()
 		{
 			return _set.AsQueryable();
 		}
 
-		public async Task<T> Add(T entity)
+		public async Task<TEntity> Add(TEntity entity)
 		{
 			var result = await _set.AddAsync(entity);
 			await _context.SaveChangesAsync();
@@ -34,21 +34,21 @@ namespace SolvexApi.Model.Repositories
 			return result.Entity;
 		}
 
-		public async Task<T> Delete(int id)
+		public async Task<TEntity> Delete(int id)
 		{
-			T entity = await Get(id);
+			TEntity entity = await Get(id);
 			_set.Remove(entity);
 			await _context.SaveChangesAsync();
 			return entity;
 		}
 
-		public async Task<T> Get(int id)
+		public async Task<TEntity> Get(int id)
 		{
 			var entity = await _set.Where(x => x.Id == id).FirstOrDefaultAsync();
 			return entity;
 		}
 
-		public async Task<T> Update(T entity)
+		public async Task<TEntity> Update(TEntity entity)
 		{
 			_context.Entry(entity).State = EntityState.Modified;
 			await _context.SaveChangesAsync();

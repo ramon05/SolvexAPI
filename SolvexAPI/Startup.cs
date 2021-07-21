@@ -17,6 +17,7 @@ using SolvexApi.Model.Interfaces;
 using AutoMapper;
 using SolvexApi.Bl.Mapper;
 using SolvexApi.Model.IoC;
+using SolvexApi.Services.IoC;
 
 namespace SolvexAPI
 {
@@ -32,7 +33,7 @@ namespace SolvexAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAutoMapper(typeof(AutomapperProfile));
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			services.AddControllers();
 			services.AddDbContext<WorkShopDbContext>(options =>
@@ -41,14 +42,8 @@ namespace SolvexAPI
 			});
 
 			services.AddModelRegistry();
+			services.AddServiceRegistry();
 			
-
-			
-			
-			//var mapperConfigure = new MapperConfiguration(m =>
-			//{
-			//	m.AddProfile(new AutomapperProfile());
-			//});
 
 			services.AddMvc();
 		}

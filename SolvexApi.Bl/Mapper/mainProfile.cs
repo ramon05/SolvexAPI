@@ -7,14 +7,17 @@ using System.Text;
 
 namespace SolvexApi.Bl.Mapper
 {
-	public class AutomapperProfile : Profile
+	public class mainProfile : Profile
 	{
-		public AutomapperProfile()
+		public mainProfile()
 		{
 			CreateMap<Document, DocumentDto>().ReverseMap();
 			CreateMap<WorkShop, WorkShopDto>().ReverseMap();
 			CreateMap<WorkShopDay, WorkShopDayDto>().ReverseMap();
-			CreateMap<Member, WorkShopMemberDto>().ReverseMap();
+			CreateMap<Member, MemberDto>().
+				ForMember(dto => dto.PhotoFileName, config => config.MapFrom(entity => entity.Photo.FileName));
+			CreateMap<MemberDto, Member>();
+			CreateMap<WorkShopMemberDto, WorkShopMember>().ReverseMap();
 		}
 	}
 }

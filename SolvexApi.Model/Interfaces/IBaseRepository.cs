@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SolvexApi.Model.Interfaces
 {
-    public interface IBaseRepository<T>
+    public interface IBaseRepository<TEntity>
     {
-        IQueryable<T> Query();
-        Task<T> Get(int id);
-        Task<T> Add(T entity);
-        Task<T> Update(T entity);
-        Task<T> Delete(int id);
+        IQueryable<TEntity> Query();
+        Task<TEntity> Get(int id);
+        Task<TEntity> Add(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
+        Task<TEntity> Delete(int id);
     }
 }
