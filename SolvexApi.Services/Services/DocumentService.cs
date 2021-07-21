@@ -11,7 +11,7 @@ namespace SolvexApi.Services.Services
     public interface IDocumentService : IBaseService<Document, DocumentDto>
     { 
     }
-    public class DocumentService : BaseService<Document, DocumentDto>
+    public class DocumentService : BaseService<Document, DocumentDto>, IDocumentService
     {
         public DocumentService(IDocumentRepository repository, IMapper mapper) : base(repository, mapper)
         {

@@ -1,44 +1,33 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SolvexApi.Bl.DTOs;
-using SolvexApi.Model.Entities;
-using SolvexApi.Model.Interfaces;
-using SolvexApi.Model.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SolvexApi.Services.Services;
 using System.Threading.Tasks;
 
 namespace SolvexAPI.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class DocumentController : ControllerBase
 	{
-		private readonly IDocumentRepository _documentRepository;
-		private readonly IMapper _mapper;
+		private readonly IDocumentService _service;
 
-		public DocumentController(IDocumentRepository documentService, IMapper mapper)
+		public DocumentController(IDocumentService service)
 		{
-			_documentRepository = documentService;
-			_mapper = mapper;
+			_service = service;
 		}
 		[HttpGet]
-		public IActionResult Get()
+		public async Task<IActionResult> Get()
 		{
-            var documents = _documentRepository.Query();
-            var documentDtos = _mapper.Map<IEnumerable<DocumentDto>>(documents);
-            return Ok(documentDtos);
+            var documents = await _service.GetAllAsync();
+            return Ok(documents);
 
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> Get(int id)
 		{
-			var documentResult = await _documentRepository.Get(id);
-			var documentDto = _mapper.Map<DocumentDto>(documentResult);
-			return Ok(documentDto);
+			var documentResult = await _service.GetAsync(id);
+			return Ok(documentResult);
 		}
 
 		[HttpPost]
@@ -49,25 +38,22 @@ namespace SolvexAPI.Controllers
 				return BadRequest();
 			}
 
-			var documentResult = _mapper.Map<Document>(documentDto);
-			await _documentRepository.Add(documentResult);
+			var documentResult = await _service.AddAsync(documentDto);
 			return Ok(documentResult);
 		}
 
 		[HttpPut]
 		public async Task<IActionResult> Put([FromBody] DocumentDto documentDto, int id)
 		{
-			var documentResult = _mapper.Map<Document>(documentDto);
-			documentResult.Id = id;
 
-			await _documentRepository.Update(documentResult);
+			var documentResult = await _service.UpdateAsync(id, documentDto);
 			return Ok(documentResult);
 		}
 
 		[HttpDelete]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var documentResult = await _documentRepository.Delete(id);
+			var documentResult = await _service.DeleteByIdAsync(id);
 
 			return Ok(documentResult);
 		}

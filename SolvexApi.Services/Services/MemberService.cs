@@ -10,7 +10,7 @@ namespace SolvexApi.Services.Services
 {
     public interface IMemberService : IBaseService<Member, MemberDto>{ 
     }
-    public class MemberService : BaseService<Member, MemberDto>
+    public class MemberService : BaseService<Member, MemberDto>, IMemberService
     {
         public MemberService(IMemberRepository repository, IMapper mapper) : base(repository, mapper)
         {

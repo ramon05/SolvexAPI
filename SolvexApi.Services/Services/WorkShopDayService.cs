@@ -10,7 +10,7 @@ namespace SolvexApi.Services.Services
 {
     public interface IWorkShopDayService : IBaseService<WorkShopDay, WorkShopDayDto>{ 
     }
-    public class WorkShopDayService : BaseService<WorkShopDay, WorkShopDayDto>
+    public class WorkShopDayService : BaseService<WorkShopDay, WorkShopDayDto>, IWorkShopDayService
     {
         public WorkShopDayService(IWorkShopDayRepository repository, IMapper mapper) : base(repository, mapper)
         {

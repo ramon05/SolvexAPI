@@ -11,7 +11,7 @@ namespace SolvexApi.Services.Services
 {
     public interface IBaseService<TEntity, TDto>
     {
-        IEnumerable<TDto> GetAllAsync();
+        Task<IEnumerable<TDto>> GetAllAsync();
         Task<TDto> GetAsync(int id);
         Task<TDto> AddAsync(TDto dto);
         Task<TDto> UpdateAsync(int id, TDto dto);
@@ -21,8 +21,8 @@ namespace SolvexApi.Services.Services
         where TEntity : class, IBase
         where TDto : class, IBaseDto
     {
-        private readonly IBaseRepository<TEntity> _repository;
-        private readonly IMapper _mapper;
+        protected readonly IBaseRepository<TEntity> _repository;
+        protected readonly IMapper _mapper;
 
         public BaseService(IBaseRepository<TEntity> repository, IMapper mapper)
         {
@@ -30,9 +30,9 @@ namespace SolvexApi.Services.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<TDto> GetAllAsync()
+        public async Task<IEnumerable<TDto>> GetAllAsync()
         {
-            var result = _repository.Query().ToListAsync();
+            var result = await _repository.Query().ToListAsync();
             var dtos = _mapper.Map<IEnumerable<TDto>>(result);
             return dtos;
         }

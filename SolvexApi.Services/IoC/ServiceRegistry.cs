@@ -11,7 +11,10 @@ namespace SolvexApi.Services.IoC
         public static void AddServiceRegistry(this IServiceCollection services)
         {
             services.AddScoped<IDocumentService, DocumentService>();
-          
+            services.AddScoped<IWorkShopService, WorkShopService>();
+            services.AddScoped<IWorkShopDayService, WorkShopDayService>();
+            services.AddScoped<IWorkShopMemberService, WorkShopMemberService>();
+            services.AddScoped<IMemberService, MemberService>();
         }
     }
 }
