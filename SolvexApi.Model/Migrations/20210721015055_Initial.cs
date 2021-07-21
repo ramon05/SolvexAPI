@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SolvexApi.Model.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,7 @@ namespace SolvexApi.Model.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Document", x => x.Id);
+                    table.PrimaryKey("PK_Documents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +50,7 @@ namespace SolvexApi.Model.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkShop", x => x.Id);
+                    table.PrimaryKey("PK_WorkShops", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,9 +78,9 @@ namespace SolvexApi.Model.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkShopMembers", x => x.Id);
+                    table.PrimaryKey("PK_Members", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkShopMembers_Document_PhotoId",
+                        name: "FK_Members_Documents_PhotoId",
                         column: x => x.PhotoId,
                         principalTable: "Documents",
                         principalColumn: "Id",
@@ -109,30 +109,77 @@ namespace SolvexApi.Model.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkShopDay", x => x.Id);
+                    table.PrimaryKey("PK_WorkShopDays", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkShopDay_WorkShop_WorkShopId",
+                        name: "FK_WorkShopDays_WorkShops_WorkShopId",
                         column: x => x.WorkShopId,
                         principalTable: "WorkShops",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WorkShopMembers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Deleted = table.Column<bool>(nullable: false),
+                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    DeletedBy = table.Column<string>(nullable: true),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    Role = table.Column<int>(nullable: false),
+                    WorkShopId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkShopMembers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkShopMembers_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WorkShopMembers_WorkShops_WorkShopId",
+                        column: x => x.WorkShopId,
+                        principalTable: "WorkShops",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_WorkShopDay_WorkShopId",
+                name: "IX_Members_PhotoId",
+                table: "Members",
+                column: "PhotoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkShopDays_WorkShopId",
                 table: "WorkShopDays",
                 column: "WorkShopId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkShopMembers_PhotoId",
-                table: "Members",
-                column: "PhotoId");
+                name: "IX_WorkShopMembers_MemberId",
+                table: "WorkShopMembers",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkShopMembers_WorkShopId",
+                table: "WorkShopMembers",
+                column: "WorkShopId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "WorkShopDays");
+
+            migrationBuilder.DropTable(
+                name: "WorkShopMembers");
 
             migrationBuilder.DropTable(
                 name: "Members");

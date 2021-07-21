@@ -10,8 +10,8 @@ using SolvexApi.Model.DataContext;
 namespace SolvexApi.Model.Migrations
 {
     [DbContext(typeof(WorkShopDbContext))]
-    [Migration("20210720141553_relation")]
-    partial class relation
+    [Migration("20210721015055_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

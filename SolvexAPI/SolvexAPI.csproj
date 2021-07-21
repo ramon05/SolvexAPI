@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SolvexApi.Bl\SolvexApi.Bl.csproj" />
     <ProjectReference Include="..\SolvexApi.Services\SolvexApi.Services.csproj" />
   </ItemGroup>
 
