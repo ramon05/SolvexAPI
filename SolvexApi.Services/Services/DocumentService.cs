@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Repositories;
@@ -13,7 +14,10 @@ namespace SolvexApi.Services.Services
     }
     public class DocumentService : BaseService<Document, DocumentDto>, IDocumentService
     {
-        public DocumentService(IDocumentRepository repository, IMapper mapper) : base(repository, mapper)
+        public DocumentService(
+            IDocumentRepository repository, 
+            IMapper mapper, IValidator<DocumentDto> validator) 
+            : base(repository, mapper, validator)
         {
         }
     }

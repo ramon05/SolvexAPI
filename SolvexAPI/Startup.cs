@@ -1,27 +1,20 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SolvexApi.Bl.IoC;
 using SolvexApi.Model.DataContext;
-using Microsoft.EntityFrameworkCore;
-using SolvexApi.Model.Repositories;
-using SolvexApi.Model.Interfaces;
-using AutoMapper;
-using SolvexApi.Bl.Mapper;
 using SolvexApi.Model.IoC;
 using SolvexApi.Services.IoC;
+using SolvexAPI.Config;
+using System;
 
 namespace SolvexAPI
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -35,15 +28,17 @@ namespace SolvexAPI
 		{
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-			services.AddControllers();
+			services.AddControllers().AddValidation();
 			services.AddDbContext<WorkShopDbContext>(options =>
 			{
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 			});
 
 			services.AddModelRegistry();
+			services.AddBlRegistry();
 			services.AddServiceRegistry();
-			
+
+			services.AddSwagger();
 
 			services.AddMvc();
 		}
@@ -55,6 +50,8 @@ namespace SolvexAPI
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseAppSwagger();
 
 			app.UseHttpsRedirection();
 

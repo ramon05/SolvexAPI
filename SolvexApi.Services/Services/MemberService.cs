@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Repositories;
@@ -12,7 +13,10 @@ namespace SolvexApi.Services.Services
     }
     public class MemberService : BaseService<Member, MemberDto>, IMemberService
     {
-        public MemberService(IMemberRepository repository, IMapper mapper) : base(repository, mapper)
+        public MemberService(
+            IMemberRepository repository, 
+            IMapper mapper, 
+            IValidator<MemberDto> validator) : base(repository, mapper, validator)
         {
         }
     }

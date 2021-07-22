@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using SolvexApi.Bl.DTOs;
 using SolvexApi.Model.Entities;
 using SolvexApi.Model.Repositories;
@@ -12,7 +13,10 @@ namespace SolvexApi.Services.Services
     }
     public class WorkShopService : BaseService<WorkShop, WorkShopDto>, IWorkShopService
     {
-        public WorkShopService(IWorkShopRepository repository, IMapper mapper) : base(repository, mapper)
+        public WorkShopService(
+            IWorkShopRepository repository, 
+            IMapper mapper, 
+            IValidator<WorkShopDto> validator) : base(repository, mapper, validator)
         {
         }
     }
