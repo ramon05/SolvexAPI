@@ -10,7 +10,15 @@ namespace SolvexApi.Bl.Validations
 	{
 		public WorkShopMemberValidator()
 		{
-			
+			RuleFor(x => x.Role)
+					.NotEmpty()
+					.WithMessage("Member's Role is required");
+			RuleFor(x => x.WorkShopId)
+					.NotEmpty()
+					.WithMessage("Member's WorkShopId is required");
+			RuleFor(x => x.MemberId)
+					.NotEmpty()
+					.WithMessage("Member's MemberId is required");
 		}
 	}
 }

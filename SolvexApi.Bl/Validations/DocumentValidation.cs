@@ -15,6 +15,12 @@ namespace SolvexApi.Bl.Validations
 				.WithMessage("Document's length must be at least 10 characters")
 				.NotEmpty()
 				.WithMessage("Document's filename is required");
+			RuleFor(x => x.ContentType)
+				.NotEmpty()
+				.WithMessage("Document's filename is required");
+			RuleFor(x => x.OriginalName)
+				.NotEmpty()
+				.WithMessage("Document's OriginalName is required");
 		}
 	}
 }
