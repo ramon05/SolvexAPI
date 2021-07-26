@@ -34,6 +34,7 @@ namespace GenericApi
 			services.AddControllers(options => options.EnableEndpointRouting = false)
 				.AddValidation();
 			services.configAutoMapper();
+			services.AddAppOData();
 
 			#endregion
 
@@ -72,10 +73,7 @@ namespace GenericApi
 
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
+			app.UseMvc(routeBuilder => routeBuilder.UseAppOData());
 		}
 	}
 }

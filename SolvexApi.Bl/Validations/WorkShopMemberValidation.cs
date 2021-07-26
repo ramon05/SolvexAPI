@@ -16,9 +16,9 @@ namespace GenericApi.Bl.Validations
 			RuleFor(x => x.WorkShopId)
 					.NotEmpty()
 					.WithMessage("Member's WorkShopId is required");
-			RuleFor(x => x.MemberId)
+			RuleFor(x => x.UserId)
 					.NotEmpty()
-					.WithMessage("Member's MemberId is required");
+					.WithMessage("Member's UserId is required");
 		}
 	}
 }

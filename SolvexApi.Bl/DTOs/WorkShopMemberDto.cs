@@ -10,6 +10,6 @@ namespace GenericApi.Bl.DTOs
     {
         public WorkShopMemberRole Role { get; set; }
         public int WorkShopId { get; set; }
-        public int MemberId { get; set; }
+        public int UserId { get; set; }
     }
 }

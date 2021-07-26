@@ -1,23 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using GenericApi.Bl.DTOs;
+using GenericApi.Model.Entities;
+using GenericApi.Services.Services;
 using Microsoft.AspNetCore.Mvc;
-using SolvexApi.Bl.DTOs;
-using SolvexApi.Model.Entities;
-using SolvexApi.Model.Interfaces;
-using SolvexApi.Model.Repositories;
-using SolvexApi.Services.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace SolvexAPI.Controllers
+namespace GenericApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class WorkShopMemberController : BaseController<WorkShopMember, WorkShopMemberDto>
     {
-        public WorkShopMemberController(IBaseService<WorkShopMember, WorkShopMemberDto> service) : base(service) 
+        public WorkShopMemberController(IWorkShopMemberService service) : base(service) 
         {
         }
     }

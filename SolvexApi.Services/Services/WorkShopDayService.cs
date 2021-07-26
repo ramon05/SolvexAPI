@@ -3,12 +3,8 @@ using FluentValidation;
 using GenericApi.Bl.DTOs;
 using GenericApi.Model.Entities;
 using GenericApi.Model.Repositories;
-using GenericApi.Services.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SolvexApi.Services.Services
+namespace GenericApi.Services.Services
 {
     public interface IWorkShopDayService : IBaseService<WorkShopDay, WorkShopDayDto>{ 
     }

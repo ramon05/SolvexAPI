@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SolvexApi.Services.Services;
+using GenericApi.Services.Services;
 
 namespace GenericApi.Services.IoC
 {
@@ -14,7 +14,7 @@ namespace GenericApi.Services.IoC
             services.AddScoped<IWorkShopService, WorkShopService>();
             services.AddScoped<IWorkShopDayService, WorkShopDayService>();
             services.AddScoped<IWorkShopMemberService, WorkShopMemberService>();
-            services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

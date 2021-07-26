@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GenericApi.Core.Enums
 {
-    public enum WorkShopMemberDocumentType
+    public enum DocumentType
     {
         ID,
         PASSPORT

@@ -15,7 +15,7 @@ namespace GenericApi.Model.IoC
             services.AddScoped<IWorkShopRepository, WorkShopRepository>();
             services.AddScoped<IWorkShopDayRepository, WorkShopDayRepository>();
             services.AddScoped<IWorkShopMemberRepository, WorkShopMemberRepository>();
-            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

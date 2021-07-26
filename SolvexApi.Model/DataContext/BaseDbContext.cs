@@ -38,13 +38,13 @@ namespace GenericApi.Model.DataContext
                         }
 
                         entry.Entity.Deleted = false;
-                        entry.Entity.CreatedDate = DateTimeOffset.Now;
+                        entry.Entity.CreatedDate = DateTimeOffset.UtcNow;
                         break;
 
                     case EntityState.Modified:
                         entry.Property(x => x.CreatedDate).IsModified = false;
                         entry.Property(x => x.CreatedBy).IsModified = false;
-                        entry.Entity.UpdatedDate = DateTimeOffset.Now;
+                        entry.Entity.UpdatedDate = DateTimeOffset.UtcNow;
                         break;
 
                     case EntityState.Deleted:
@@ -52,7 +52,7 @@ namespace GenericApi.Model.DataContext
                         entry.Property(x => x.CreatedBy).IsModified = false;
                         entry.State = EntityState.Modified;
                         entry.Entity.Deleted = true;
-                        entry.Entity.DeletedDate = DateTimeOffset.Now;
+                        entry.Entity.DeletedDate = DateTimeOffset.UtcNow;
                         break;
 
                     default:

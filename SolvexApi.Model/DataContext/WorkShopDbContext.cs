@@ -17,7 +17,7 @@ namespace GenericApi.Model.DataContext
 		public virtual DbSet<WorkShop> WorkShops { get; set; }
 		public virtual DbSet<WorkShopDay> WorkShopDays { get; set; }
 		public DbSet<WorkShopMember> WorkShopMembers { get; set; }
-		public virtual DbSet<Member> Members { get; set; }
+		public virtual DbSet<User> Users { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

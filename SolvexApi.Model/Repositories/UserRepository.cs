@@ -7,10 +7,10 @@ using System.Text;
 
 namespace GenericApi.Model.Repositories
 {
-    public interface IMemberRepository : IBaseRepository<Member> { }
-    class MemberRepository : BaseRepository<Member>, IMemberRepository
+    public interface IUserRepository : IBaseRepository<User> { }
+    class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public MemberRepository(WorkShopDbContext context) : base(context)
+        public UserRepository(WorkShopDbContext context) : base(context)
         {
 
         }

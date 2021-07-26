@@ -7,9 +7,9 @@ namespace GenericApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkShopController : BaseController<WorkShop, WorkShopDto>
+    public class UserController : BaseController<User, UserDto>
     {
-        public WorkShopController(IWorkShopService service) : base(service)
+        public UserController(IUserService service) : base(service)
         {
         }
     }

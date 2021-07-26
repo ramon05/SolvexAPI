@@ -1,38 +1,54 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GenericApi.Core.BaseModel.Base;
+using GenericApi.Services.Services;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SolvexApi.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
-namespace SolvexAPI.Controllers
+namespace GenericApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController<TEntity, TDto> : ControllerBase
+        where TEntity : IBase
+        where TDto : IBaseDto
     {
         protected readonly IBaseService<TEntity, TDto> _service;
-
         public BaseController(IBaseService<TEntity, TDto> service)
         {
             _service = service;
         }
 
+        //TODO: refactor this method to return dto
         [HttpGet]
-        public virtual async Task<IActionResult> Get()
+        [EnableQuery]
+        public virtual IActionResult Get()
         {
-            var result = await _service.GetAllAsync();
+            var query = _service.AsQuery();
+            return Ok(query);
+        }
+
+        [HttpGet("Query")]
+        public virtual async Task<IActionResult> Query(ODataQueryOptions<TEntity> queryOptions)
+        {
+            var query = _service.AsQuery();
+            var odataQuery = queryOptions.ApplyTo(query).Cast<TEntity>();
+            var result = await _service.ProjectToDto(odataQuery);
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> Get([FromRoute] int id)
+        public virtual async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var result = await _service.GetAsync(id);
+            var result = await _service.GetByIdAsync(id);
 
             if (result is null)
-                return NotFound();
+                return NotFound($"The record with id {id} was not found");
 
             return Ok(result);
         }
@@ -43,18 +59,21 @@ namespace SolvexAPI.Controllers
             var result = await _service.AddAsync(dto);
 
             if (result.IsSuccess is false)
-                return BadRequest(result);
+                return UnprocessableEntity(result);
 
-            return Ok(result);
+            return CreatedAtAction(WebRequestMethods.Http.Get, new { id = result.Entity.Id }, result.Entity);
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<IActionResult> Post([FromRoute] int id, [FromBody] TDto dto)
+        public virtual async Task<IActionResult> Put([FromRoute] int id, [FromBody] TDto dto)
         {
             var result = await _service.UpdateAsync(id, dto);
 
             if (result is null)
                 return NotFound($"The record with id {id} was not found");
+
+            if (result.IsSuccess is false)
+                return UnprocessableEntity(result);
 
             return Ok(result);
         }
@@ -69,6 +88,5 @@ namespace SolvexAPI.Controllers
 
             return Ok(result);
         }
-
     }
 }
