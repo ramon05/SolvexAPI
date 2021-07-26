@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Core.Enums
+namespace GenericApi.Core.Enums
 {
     public enum Gender
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SolvexApi.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SolvexApi.Services.Services;
 
-namespace SolvexApi.Services.IoC
+namespace GenericApi.Services.IoC
 {
     public static class ServiceRegistry
     {

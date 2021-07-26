@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SolvexApi.Core.BaseModel.Base;
+using GenericApi.Core.BaseModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace SolvexApi.Model.Extensions
+namespace GenericApi.Model.Extensions
 {
     public static class EntityFrameworkModelBuilderExtensions
     {

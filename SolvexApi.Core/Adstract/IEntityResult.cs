@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Core.Adstract
+namespace GenericApi.Core.Adstract
 {
     public interface IEntityOperationResult<TDto>
     {

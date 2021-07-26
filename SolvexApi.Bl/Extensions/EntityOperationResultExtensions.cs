@@ -1,11 +1,11 @@
-﻿using SolvexApi.Core.Adstract;
+﻿using GenericApi.Core.Adstract;
 using System;
 using System.Collections.Generic;
 using FluentValidation.Results;
 using System.Text;
 using System.Linq;
 
-namespace SolvexApi.Bl.Extensions
+namespace GenericApi.Bl.Extensions
 {
     public static class EntityOperationResultExtensions
     {

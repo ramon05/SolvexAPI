@@ -1,9 +1,9 @@
-﻿using SolvexApi.Core.BaseModel.Base;
+﻿using GenericApi.Core.BaseModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Bl.DTOs
+namespace GenericApi.Bl.DTOs
 {
 	public class DocumentDto : BaseEntityDto
 	{

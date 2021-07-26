@@ -1,11 +1,11 @@
-﻿using SolvexApi.Model.DataContext;
-using SolvexApi.Model.Entities;
-using SolvexApi.Model.Interfaces;
+﻿using GenericApi.Model.Interfaces;
+using GenericApi.Model.DataContext;
+using GenericApi.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Model.Repositories
+namespace GenericApi.Model.Repositories
 {
     public interface IMemberRepository : IBaseRepository<Member> { }
     class MemberRepository : BaseRepository<Member>, IMemberRepository

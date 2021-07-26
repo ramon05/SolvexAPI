@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using SolvexApi.Bl.Extensions;
-using SolvexApi.Core.Adstract;
-using SolvexApi.Core.BaseModel.Base;
-using SolvexApi.Model.Interfaces;
+using GenericApi.Bl.Extensions;
+using GenericApi.Core.Adstract;
+using GenericApi.Core.BaseModel.Base;
+using GenericApi.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolvexApi.Services.Services
+namespace GenericApi.Services.Services
 {
     public interface IBaseService<TEntity, TDto>
     {

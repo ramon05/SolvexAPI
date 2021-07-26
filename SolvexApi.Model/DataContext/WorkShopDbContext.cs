@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SolvexApi.Model.Entities;
+﻿using GenericApi.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Model.DataContext
+namespace GenericApi.Model.DataContext
 {
 	public partial class WorkShopDbContext : BaseDbContext
 	{

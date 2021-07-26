@@ -1,9 +1,9 @@
-﻿using SolvexApi.Core.BaseModel.Base;
+﻿using GenericApi.Core.BaseModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Model.Entities
+namespace GenericApi.Model.Entities
 {
     public class WorkShop : BaseEntity
     {

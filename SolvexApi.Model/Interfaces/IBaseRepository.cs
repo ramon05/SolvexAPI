@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolvexApi.Model.Interfaces
+namespace GenericApi.Model.Interfaces
 {
     public interface IBaseRepository<TEntity>
     {

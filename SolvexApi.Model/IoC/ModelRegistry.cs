@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SolvexApi.Model.Interfaces;
-using SolvexApi.Model.Repositories;
+using GenericApi.Model.Interfaces;
+using GenericApi.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Model.IoC
+namespace GenericApi.Model.IoC
 {
     public static class ModelRegistry
     {

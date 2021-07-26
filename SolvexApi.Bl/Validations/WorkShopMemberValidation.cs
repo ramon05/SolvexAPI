@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using SolvexApi.Bl.DTOs;
+using GenericApi.Bl.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Bl.Validations
+namespace GenericApi.Bl.Validations
 {
 	public class WorkShopMemberValidator : AbstractValidator<WorkShopMemberDto>
 	{

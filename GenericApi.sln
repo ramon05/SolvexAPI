@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexAPI", "SolvexAPI\SolvexAPI.csproj", "{CC2FCB0C-29BD-4461-A6F7-1DD97DD924A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi", "SolvexAPI\GenericApi.csproj", "{CC2FCB0C-29BD-4461-A6F7-1DD97DD924A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexApi.Core", "SolvexApi.Core\SolvexApi.Core.csproj", "{74D53B43-2B47-4AAC-AC0D-FB81B45EFBFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi.Core", "SolvexApi.Core\GenericApi.Core.csproj", "{74D53B43-2B47-4AAC-AC0D-FB81B45EFBFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexApi.Model", "SolvexApi.Model\SolvexApi.Model.csproj", "{BD895F66-BEF2-4FBE-9CC9-C43C55E8CE97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi.Model", "SolvexApi.Model\GenericApi.Model.csproj", "{BD895F66-BEF2-4FBE-9CC9-C43C55E8CE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexApi.Bl", "SolvexApi.Bl\SolvexApi.Bl.csproj", "{37D565B3-BDC5-4AF4-AC15-7AD7E6F887ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi.Bl", "SolvexApi.Bl\GenericApi.Bl.csproj", "{37D565B3-BDC5-4AF4-AC15-7AD7E6F887ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexApi.Services", "SolvexApi.Services\SolvexApi.Services.csproj", "{A5976A66-69A1-42FC-B79C-DB7E00827787}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi.Services", "SolvexApi.Services\GenericApi.Services.csproj", "{A5976A66-69A1-42FC-B79C-DB7E00827787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolvexApi.Tests", "SolvexApi.Tests\SolvexApi.Tests.csproj", "{F61D83F0-128C-4BFF-A4B9-DAC6B47DC5BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericApi.Tests", "SolvexApi.Tests\GenericApi.Tests.csproj", "{F61D83F0-128C-4BFF-A4B9-DAC6B47DC5BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

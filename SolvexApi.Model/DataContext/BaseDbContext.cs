@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GenericApi.Model.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using SolvexApi.Core.BaseModel.Base;
-using SolvexApi.Model.Extensions;
+using GenericApi.Core.BaseModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SolvexApi.Model.DataContext
+namespace GenericApi.Model.DataContext
 {
     public interface IDbContext
     {

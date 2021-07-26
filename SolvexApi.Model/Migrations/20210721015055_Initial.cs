@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SolvexApi.Model.Migrations
+namespace GenericApi.Model.Migrations
 {
     public partial class Initial : Migration
     {

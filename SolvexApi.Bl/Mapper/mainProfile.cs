@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using SolvexApi.Bl.DTOs;
-using SolvexApi.Model.Entities;
+using GenericApi.Bl.DTOs;
+using GenericApi.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Bl.Mapper
+namespace GenericApi.Bl.Mapper
 {
 	public class mainProfile : Profile
 	{

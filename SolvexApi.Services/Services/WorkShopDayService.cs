@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using SolvexApi.Bl.DTOs;
-using SolvexApi.Model.Entities;
-using SolvexApi.Model.Repositories;
+using GenericApi.Bl.DTOs;
+using GenericApi.Model.Entities;
+using GenericApi.Model.Repositories;
+using GenericApi.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;

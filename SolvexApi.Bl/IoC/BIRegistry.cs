@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Bl.IoC
+namespace GenericApi.Bl.IoC
 {
     public static class BlRegistry
     {

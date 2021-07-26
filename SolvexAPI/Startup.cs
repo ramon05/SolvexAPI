@@ -1,18 +1,19 @@
 using AutoMapper;
+using GenericApi.Bl.Config;
+using GenericApi.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SolvexApi.Bl.IoC;
-using SolvexApi.Model.DataContext;
-using SolvexApi.Model.IoC;
-using SolvexApi.Services.IoC;
-using SolvexAPI.Config;
+using GenericApi.Bl.IoC;
+using GenericApi.Model.DataContext;
+using GenericApi.Model.IoC;
+using GenericApi.Services.IoC;
 using System;
 
-namespace SolvexAPI
+namespace GenericApi
 {
     public class Startup
 	{
@@ -26,19 +27,31 @@ namespace SolvexAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-			services.AddControllers().AddValidation();
-			services.AddDbContext<WorkShopDbContext>(options =>
-			{
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-			});
+			#region External Dependencies Configs
+
+			services.ConfigSqlServerDbContext(Configuration.GetConnectionString("DefaultConnection"));
+			services.AddControllers(options => options.EnableEndpointRouting = false)
+				.AddValidation();
+			services.configAutoMapper();
+
+			#endregion
+
+			#region Api Libraries
+
+			services.AddSwagger();
+
+			#endregion
+
+			#region App Registries
 
 			services.AddModelRegistry();
 			services.AddBlRegistry();
 			services.AddServiceRegistry();
 
-			services.AddSwagger();
+			#endregion
+
+
 
 			services.AddMvc();
 		}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Core.Settings
+namespace GenericApi.Core.Settings
 {
 	class ConnectionStrings
 	{

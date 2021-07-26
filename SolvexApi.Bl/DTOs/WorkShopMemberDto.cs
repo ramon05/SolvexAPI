@@ -1,11 +1,10 @@
-﻿using SolvexApi.Core.BaseModel.Base;
-using SolvexApi.Core.Enums;
-using SolvexApi.Model.Entities;
+﻿using GenericApi.Core.BaseModel.Base;
+using GenericApi.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Bl.DTOs
+namespace GenericApi.Bl.DTOs
 {
     public class WorkShopMemberDto : BaseEntityDto
     {

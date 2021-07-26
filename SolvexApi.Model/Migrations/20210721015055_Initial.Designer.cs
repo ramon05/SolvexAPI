@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SolvexApi.Model.DataContext;
+using GenericApi.Model.DataContext;
 
-namespace SolvexApi.Model.Migrations
+namespace GenericApi.Model.Migrations
 {
     [DbContext(typeof(WorkShopDbContext))]
     [Migration("20210721015055_Initial")]

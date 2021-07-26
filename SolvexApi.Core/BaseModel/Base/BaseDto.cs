@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolvexApi.Core.BaseModel.Base
+namespace GenericApi.Core.BaseModel.Base
 {
 
 	public interface IBaseDto

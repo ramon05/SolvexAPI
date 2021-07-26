@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SolvexApi.Core.BaseModel.Base;
-using SolvexApi.Model.DataContext;
-using SolvexApi.Model.Interfaces;
+﻿using GenericApi.Model.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using GenericApi.Core.BaseModel.Base;
+using GenericApi.Model.DataContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolvexApi.Model.Repositories
+namespace GenericApi.Model.Repositories
 {
 	public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, IBase
 	{

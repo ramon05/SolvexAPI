@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SolvexAPI.Config
+namespace GenericApi.Config
 {
     public static class SwaggerConfig
     {
