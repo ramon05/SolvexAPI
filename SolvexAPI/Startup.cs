@@ -12,6 +12,7 @@ using GenericApi.Model.DataContext;
 using GenericApi.Model.IoC;
 using GenericApi.Services.IoC;
 using System;
+using GenericApi.Core.Settings;
 
 namespace GenericApi
 {
@@ -27,22 +28,48 @@ namespace GenericApi
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			
+			#region App Settings
 
-			#region External Dependencies Configs
+			services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
+
+			#endregion
+
+			#region CORS
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy("MainPolicy",
+					  builder =>
+					  {
+						  builder
+								 .AllowAnyHeader()
+								 .AllowAnyMethod()
+								 .AllowCredentials();
+
+						  //TODO: remove this line for production
+						  builder.SetIsOriginAllowed(x => true);
+					  });
+			});
+
+			#endregion
+
+			#region External Dependencies
 
 			services.ConfigSqlServerDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers(options => options.EnableEndpointRouting = false)
                 .AddNewtonsoftJson();
             services.AddControllers(options => options.EnableEndpointRouting = false).ConfigFluentValidation();
 			services.configAutoMapper();
-			services.AddAppOData();
 			services.ConfigSerilog();
 
 			#endregion
 
 			#region Api Libraries
 
+			services.ConfigJwtAuth(Configuration);
 			services.AddSwagger();
+			services.AddAppOData();
 
 			#endregion
 
@@ -73,7 +100,10 @@ namespace GenericApi
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
+
+			app.UseCors("MainPolicy");
 
 			app.UseMvc(routeBuilder => routeBuilder.UseAppOData());
 		}

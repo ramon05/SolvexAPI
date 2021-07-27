@@ -12,13 +12,5 @@ namespace GenericApi.Bl.DTOs
         public string Username { get; set; }
         public string Token { get; set; }
 
-        public AuthenticateResponseDto(UserDto user, string token)
-        {
-            Id = user.Id.GetValueOrDefault();
-            FirstName = user.Name;
-            LastName = user.LastName;
-            Username = user.UserName;
-            Token = token;
-        }
     }
 }
