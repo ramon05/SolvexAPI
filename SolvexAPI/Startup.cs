@@ -31,10 +31,12 @@ namespace GenericApi
 			#region External Dependencies Configs
 
 			services.ConfigSqlServerDbContext(Configuration.GetConnectionString("DefaultConnection"));
-			services.AddControllers(options => options.EnableEndpointRouting = false)
-				.AddValidation();
+            services.AddControllers(options => options.EnableEndpointRouting = false)
+                .AddNewtonsoftJson();
+            services.AddControllers(options => options.EnableEndpointRouting = false).ConfigFluentValidation();
 			services.configAutoMapper();
 			services.AddAppOData();
+			services.ConfigSerilog();
 
 			#endregion
 

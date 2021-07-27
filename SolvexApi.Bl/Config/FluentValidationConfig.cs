@@ -10,7 +10,7 @@ namespace GenericApi.Bl.Config
 {
     public static class FluentValidationConfig
     {
-        public static IMvcBuilder AddValidation(this IMvcBuilder builder)
+        public static IMvcBuilder ConfigFluentValidation(this IMvcBuilder builder)
         {
             builder.AddFluentValidation(x =>
             {

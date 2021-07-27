@@ -2,6 +2,7 @@
 using GenericApi.Model.Entities;
 using GenericApi.Services.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace GenericApi.Controllers
 {

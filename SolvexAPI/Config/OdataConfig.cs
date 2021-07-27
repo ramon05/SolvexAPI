@@ -1,4 +1,5 @@
-﻿using GenericApi.Model.Entities;
+﻿using GenericApi.Bl.DTOs;
+using GenericApi.Model.Entities;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
@@ -48,7 +49,7 @@ namespace GenericApi.Config
             var odataBuilder = new ODataConventionModelBuilder();
 
             //TODO: replace Entity with Dto when refactor Controller Get Method
-            odataBuilder.EntitySet<Document>("Document");
+            odataBuilder.EntitySet<DocumentDto>("Document");
 
             return odataBuilder.GetEdmModel();
         }
