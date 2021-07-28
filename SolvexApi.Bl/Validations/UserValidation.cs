@@ -25,9 +25,13 @@ namespace GenericApi.Bl.Validations
 			RuleFor(x => x.Gender)
 				.NotEmpty()
 				.WithMessage("User's Gender is required");
-			RuleFor(x => x.PhotoFileName)
+			RuleFor(x => x.UserName)
 				.NotEmpty()
-				.WithMessage("User's PhotoFileName is required");
+				.WithMessage("User's UserName is required");
+			RuleFor(x => x.Password)
+				.NotEmpty()
+				.WithMessage("User's Password is required");
+			    
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace GenericApi.Services.Services
             var dto = _mapper.Map<TDto>(entity);
             return dto;
         }
-        public async Task<IEntityOperationResult<TDto>> AddAsync(TDto dto)
+        public virtual async Task<IEntityOperationResult<TDto>> AddAsync(TDto dto)
         {
             var validationResult = _validator.Validate(dto);
             if (validationResult.IsValid is false)

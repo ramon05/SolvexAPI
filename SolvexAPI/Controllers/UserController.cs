@@ -31,16 +31,11 @@ namespace GenericApi.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
         public override async Task<IActionResult> Post([FromBody] UserDto dto)
         {
-
-            dto.Password = BC.HashPassword(dto.Password);
-            var result = await _service.AddAsync(dto);
-
-            if (result.IsSuccess is false)
-                return UnprocessableEntity(result);
-
-            return CreatedAtAction(WebRequestMethods.Http.Get, new { id = result.Entity.Id }, result.Entity);
-        }
+            return await base.Post(dto);
+        } 
     }
 }

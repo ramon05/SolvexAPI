@@ -15,6 +15,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using GenericApi.Core.Adstract;
+using GenericApi.Bl.Extensions;
 
 namespace GenericApi.Services.Services
 {
@@ -37,18 +39,14 @@ namespace GenericApi.Services.Services
         {
             var user = await _repository.Query()
                 .Where(x => x.UserName == model.Username)
-                .Select(x => new {
-                    x.Id,
-                    x.UserName,
-                    x.Name,
-                    x.LastName,
-                    x.Password
-                })
+                .Select(x => new { x.Id, x.UserName, x.Name, x.LastName, x.Password})
                 .FirstOrDefaultAsync();
 
-            var isValidPassword = BC.Verify(model.Password, user.Password);
+            if (user is null)
+                return null;
 
-            if (user is null || !isValidPassword)
+            var isValidPassword = ValidatedPassword(user.Password, model.Password);
+            if (!isValidPassword)
                 return null;
 
             var response = new AuthenticateResponseDto
@@ -60,8 +58,38 @@ namespace GenericApi.Services.Services
             };
 
             response.Token = GenerateJwtToken(response);
-
             return response;
+        }
+
+        public override async Task<IEntityOperationResult<UserDto>> AddAsync(UserDto dto)
+        {
+            var validationResult = _validator.Validate(dto);
+            if (validationResult.IsValid is false)
+                return validationResult.ToOperationResult<UserDto>();
+
+            var entity = _mapper.Map<User>(dto);
+            entity.Password = EncodedPassword(dto.Password);
+
+            var entityResult = await _repository.Add(entity);
+
+            _mapper.Map(entityResult, dto);
+
+            var result = dto.ToOperationResult();
+            return result;
+        }
+
+        private bool ValidatedPassword(string passwordHash, string password)
+        {
+            bool verified = BC.Verify(password, passwordHash);
+
+            return verified;
+        }
+
+        private string EncodedPassword(string Password)
+        {
+            var PasswordHash = BC.HashPassword(Password);
+
+            return PasswordHash;
         }
 
         private string GenerateJwtToken(AuthenticateResponseDto user)
