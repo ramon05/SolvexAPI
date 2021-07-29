@@ -11,10 +11,10 @@ namespace GenericApi.Bl.Validations
 		public WorkShopDayValidator()
 		{
 			RuleFor(x => x.Day)
-					.NotEmpty()
+					.NotNull()
 					.WithMessage("WorkShop's Day is required");
 			RuleFor(x => x.Mode)
-					.NotEmpty()
+					.NotNull()
 					.WithMessage("WorkShop's Mode is required");
 			RuleFor(x => x.ModeLocation)
 					.NotEmpty()

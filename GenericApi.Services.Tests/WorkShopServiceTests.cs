@@ -143,7 +143,7 @@ namespace GenericApi.Services.Tests
         public async Task ShouldDeleteWorkShopAsync()
         {
             //Arrange
-            var id = 2;
+            var id = 1;
 
             //Act
             var result = await _workShopService.DeleteByIdAsync(id);
