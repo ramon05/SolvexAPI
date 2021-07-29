@@ -37,22 +37,22 @@ namespace GenericApi.Services.Services
             _validator = validator;
         }
 
-        public async Task<IEnumerable<TDto>> ProjectToDto(IQueryable<TEntity> query)
+        public virtual async Task<IEnumerable<TDto>> ProjectToDto(IQueryable<TEntity> query)
         {
             var list = query.ProjectTo<TDto>(_mapper.ConfigurationProvider);
             return await list.ToListAsync();
         }
-        public IQueryable<TEntity> AsQuery()
+        public virtual IQueryable<TEntity> AsQuery()
         {
             return _repository.Query();
         }
-        public async Task<IEnumerable<TDto>> GetAllAsync()
+        public virtual async Task<IEnumerable<TDto>> GetAllAsync()
         {
             var result = await _repository.Query().ToListAsync();
             var dtos = _mapper.Map<IEnumerable<TDto>>(result);
             return dtos;
         }
-        public async Task<TDto> GetByIdAsync(int id)
+        public virtual async Task<TDto> GetByIdAsync(int id)
         {
             var entity = await _repository.Get(id);
             var dto = _mapper.Map<TDto>(entity);
@@ -72,7 +72,7 @@ namespace GenericApi.Services.Services
             var result = dto.ToOperationResult();
             return result;
         }
-        public async Task<IEntityOperationResult<TDto>> UpdateAsync(int id, TDto dto)
+        public virtual async Task<IEntityOperationResult<TDto>> UpdateAsync(int id, TDto dto)
         {
             var validationResult = _validator.Validate(dto);
             if (validationResult.IsValid is false)
@@ -91,7 +91,7 @@ namespace GenericApi.Services.Services
             var result = dto.ToOperationResult();
             return result;
         }
-        public async Task<IEntityOperationResult<TDto>> DeleteByIdAsync(int id)
+        public virtual async Task<IEntityOperationResult<TDto>> DeleteByIdAsync(int id)
         {
             var entity = await _repository.Get(id);
 
@@ -104,7 +104,5 @@ namespace GenericApi.Services.Services
             var result = dto.ToOperationResult();
             return result;
         }
-
-
     }
 }

@@ -17,13 +17,13 @@ namespace GenericApi.Bl.Validations
 				.NotEmpty()
 				.WithMessage("User's LastName is required");
 			RuleFor(x => x.DocumentType)
-				.NotEmpty()
+				.NotNull()
 				.WithMessage("User's DocumentType is required");
 			RuleFor(x => x.DocumentTypeValue)
 				.NotEmpty()
 				.WithMessage("User's DocumentTypeValue is required");
 			RuleFor(x => x.Gender)
-				.NotEmpty()
+				.NotNull()
 				.WithMessage("User's Gender is required");
 			RuleFor(x => x.UserName)
 				.NotEmpty()
