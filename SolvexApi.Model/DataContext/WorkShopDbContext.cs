@@ -40,5 +40,5 @@ namespace GenericApi.Model.DataContext
 
 			base.OnModelCreating(modelBuilder);
 		}
-	}
+    }
 }

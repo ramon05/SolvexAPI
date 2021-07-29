@@ -131,7 +131,7 @@ namespace GenericApi.Services.Tests
         }
 
         [Fact]
-        public async Task ShouldGetByUserAsync()
+        public async Task ShouldGetByIdUserAsync()
         {
             //Arrange
             var id = 2;
