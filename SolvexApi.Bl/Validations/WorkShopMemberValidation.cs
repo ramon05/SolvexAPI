@@ -11,7 +11,7 @@ namespace GenericApi.Bl.Validations
 		public WorkShopMemberValidator()
 		{
 			RuleFor(x => x.Role)
-					.NotEmpty()
+					.NotNull()
 					.WithMessage("Member's Role is required");
 			RuleFor(x => x.WorkShopId)
 					.NotEmpty()
