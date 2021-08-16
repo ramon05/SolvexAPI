@@ -31,11 +31,15 @@ namespace GenericApi.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public override async Task<IActionResult> Post([FromBody] UserDto dto)
+        [HttpPost("changePassword/{userId}")]
+        public async Task<IActionResult> ChangePassword([FromRoute] int userId, [FromBody] ChangePasswordDto model)
         {
-            return await base.Post(dto);
-        } 
+            var response = await _userService.ChangePassword(userId, model);
+
+            if (response.IsSuccess is false)
+                return BadRequest(response);
+
+            return Ok(response);
+        }
     }
 }

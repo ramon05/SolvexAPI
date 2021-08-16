@@ -2,6 +2,7 @@
 using GenericApi.Bl.DTOs;
 using GenericApi.Bl.Mapper;
 using GenericApi.Bl.Validations;
+using GenericApi.Core.Enums;
 using GenericApi.Core.Settings;
 using GenericApi.Model.DataContext;
 using GenericApi.Model.Entities;
@@ -10,9 +11,7 @@ using GenericApi.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -33,7 +32,8 @@ namespace GenericApi.Services.Tests
             DocumentTypeValue = "22500851658",
             Gender = Core.Enums.Gender.MALE,
             UserName = "emmanuel",
-            Password = BCrypt.Net.BCrypt.HashPassword("Hola1234,")
+            Password = BCrypt.Net.BCrypt.HashPassword("Hola1234,"),
+            UserRole = UserRole.USER
         };
 
         private User _ramon = new User
@@ -47,7 +47,8 @@ namespace GenericApi.Services.Tests
             DocumentTypeValue = "22500851658",
             Gender = Core.Enums.Gender.MALE,
             UserName = "ramon",
-            Password = BCrypt.Net.BCrypt.HashPassword("Hola1234")
+            Password = BCrypt.Net.BCrypt.HashPassword("Hola1234"),
+            UserRole = UserRole.USER
         };
 
 
@@ -107,7 +108,8 @@ namespace GenericApi.Services.Tests
                 DocumentTypeValue = "22500851658",
                 Gender = Core.Enums.Gender.MALE,
                 UserName = "emmanuel",
-                Password = "Hola1234,"
+                Password = "Hola1234,",
+                UserRole = UserRole.USER
             };
 
             //Act
@@ -176,7 +178,8 @@ namespace GenericApi.Services.Tests
                 DocumentTypeValue = "22500851658",
                 Gender = Core.Enums.Gender.MALE,
                 UserName = "emma123",
-                Password = "Hola1234,"
+                Password = "Hola1234,",
+                 UserRole = UserRole.USER
             };
             //Act
             var result = await _userService.UpdateAsync(id, requestDto);

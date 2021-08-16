@@ -4,14 +4,16 @@ using GenericApi.Model.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenericApi.Model.Migrations
 {
     [DbContext(typeof(WorkShopDbContext))]
-    partial class WorkShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210811153258_UserTable2")]
+    partial class UserTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +124,6 @@ namespace GenericApi.Model.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserRole")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PhotoId");
@@ -135,9 +134,9 @@ namespace GenericApi.Model.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTimeOffset(new DateTime(2021, 8, 15, 15, 27, 19, 226, DateTimeKind.Unspecified).AddTicks(2988), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2021, 8, 11, 15, 32, 56, 137, DateTimeKind.Unspecified).AddTicks(6232), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
-                            Dob = new DateTime(2021, 8, 15, 10, 27, 19, 226, DateTimeKind.Local).AddTicks(4890),
+                            Dob = new DateTime(2021, 8, 11, 10, 32, 56, 137, DateTimeKind.Local).AddTicks(8277),
                             DocumentType = 0,
                             DocumentTypeValue = "00000000000",
                             Gender = 0,
@@ -146,8 +145,7 @@ namespace GenericApi.Model.Migrations
                             Name = "Admin",
                             Password = "Hola123,",
                             SecondLastName = "Admin",
-                            UserName = "Admin",
-                            UserRole = 0
+                            UserName = "Admin"
                         });
                 });
 

@@ -13,5 +13,6 @@ namespace GenericApi.Bl.DTOs
         public string ModeLocation { get; set; }
         public TimeSpan StartHour { get; set; }
         public TimeSpan? EndHour { get; set; }
+        public int WorkShopId { get; set; }
     }
 }

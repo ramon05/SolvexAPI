@@ -1,4 +1,5 @@
 ﻿using GenericApi.Core.BaseModel.Base;
+using GenericApi.Filters;
 using GenericApi.Services.Services;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 namespace GenericApi.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+   // [Authorize]
     [ApiController]
     public class BaseController<TEntity, TDto> : ControllerBase
         where TEntity : IBase
@@ -36,11 +37,15 @@ namespace GenericApi.Controllers
         }
 
         [HttpGet("Query")]
+        [ODataFeature]
         public virtual async Task<IActionResult> Query(ODataQueryOptions<TEntity> queryOptions)
         {
             var query = _service.AsQuery();
+
             var odataQuery = queryOptions.ApplyTo(query).Cast<TEntity>();
+
             var result = await _service.ProjectToDto(odataQuery);
+
             return Ok(result);
         }
 

@@ -13,5 +13,7 @@ namespace GenericApi.Model.Entities
         public string ModeLocation { get; set; }
         public TimeSpan StartHour { get; set; }
         public TimeSpan? EndHour { get; set; }
+        public int WorkShopId { get; set; }
+        public virtual WorkShop WorkShop { get; set; }
     }
 }

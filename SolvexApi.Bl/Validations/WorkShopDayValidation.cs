@@ -22,7 +22,9 @@ namespace GenericApi.Bl.Validations
 			RuleFor(x => x.StartHour)
 					.NotEmpty()
 					.WithMessage("WorkShop's StartHour is required");
-
+			RuleFor(x => x.WorkShopId)
+			   .NotNull()
+			   .WithMessage("WorkShopDay's WorkShopId is required");
 		}
 	}
 }

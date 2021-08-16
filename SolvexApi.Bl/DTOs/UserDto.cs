@@ -17,10 +17,14 @@ namespace GenericApi.Bl.DTOs
         public DocumentType DocumentType { get; set; }
         public string DocumentTypeValue { get; set; }
         public int? PhotoId { get; set; }
+        public DocumentDto Photo { get; set; }
         public string PhotoFileName { get; set; }
 
+        public string Signature { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        
+        public UserRole UserRole { get; set; }
+
     }
 }

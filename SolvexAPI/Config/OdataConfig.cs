@@ -50,6 +50,10 @@ namespace GenericApi.Config
 
             //TODO: replace Entity with Dto when refactor Controller Get Method
             odataBuilder.EntitySet<DocumentDto>("Document");
+            odataBuilder.EntitySet<User>("User");
+            odataBuilder.EntitySet<WorkShop>("WorkShop");
+            odataBuilder.EntitySet<WorkShopDay>("WorkShopDay");
+            odataBuilder.EntitySet<WorkShopMember>("WorkShopMember");
 
             return odataBuilder.GetEdmModel();
         }

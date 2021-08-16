@@ -15,6 +15,7 @@ namespace GenericApi.Services.IoC
             services.AddScoped<IWorkShopDayService, WorkShopDayService>();
             services.AddScoped<IWorkShopMemberService, WorkShopMemberService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFileService, FileService>();
         }
     }
 }

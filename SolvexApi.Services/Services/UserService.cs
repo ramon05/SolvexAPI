@@ -22,6 +22,7 @@ namespace GenericApi.Services.Services
 {
     public interface IUserService : IBaseService<User, UserDto>{
         Task<AuthenticateResponseDto> GetToken(AuthenticateRequestDto model);
+        Task<IEntityOperationResult<UserDto>> ChangePassword(int userId, ChangePasswordDto model);
     }
     public class UserService : BaseService<User, UserDto>, IUserService
     {
@@ -45,7 +46,7 @@ namespace GenericApi.Services.Services
             if (user is null)
                 return null;
 
-            var isValidPassword = ValidatedPassword(user.Password, model.Password);
+            var isValidPassword = ValidatePassword(user.Password, model.Password);
             if (!isValidPassword)
                 return null;
 
@@ -68,7 +69,7 @@ namespace GenericApi.Services.Services
                 return validationResult.ToOperationResult<UserDto>();
 
             var entity = _mapper.Map<User>(dto);
-            entity.Password = EncodedPassword(dto.Password);
+            entity.Password = EncodePassword(dto.Password);
 
             var entityResult = await _repository.Add(entity);
 
@@ -78,14 +79,14 @@ namespace GenericApi.Services.Services
             return result;
         }
 
-        private bool ValidatedPassword(string passwordHash, string password)
+        private bool ValidatePassword(string passwordHash, string password)
         {
             bool verified = BC.Verify(password, passwordHash);
 
             return verified;
         }
 
-        private string EncodedPassword(string Password)
+        private string EncodePassword(string Password)
         {
             var PasswordHash = BC.HashPassword(Password);
 
@@ -126,6 +127,37 @@ namespace GenericApi.Services.Services
             var token = handler.WriteToken(securityToken);
 
             return token;
+        }
+
+        public async Task<IEntityOperationResult<UserDto>> ChangePassword(int userId, ChangePasswordDto model)
+        {
+            var user = await _repository.Get(userId);
+
+            if (user is null)
+                return new EntityOperationResult<UserDto>
+                {
+                    Errors = new List<string>()
+                    {
+                       "User not fount"
+                    }
+                };
+
+            var valid = model.Password.Equals(model.ConfirmPassword);
+
+            if (!valid)
+                return new EntityOperationResult<UserDto>
+                {
+                    Errors = new List<string>()
+                    {
+                        "Passwords does not match"
+                    }
+                };
+
+            user.Password = EncodePassword(model.Password);
+
+            await _repository.Update(user);
+
+            return new EntityOperationResult<UserDto>();
         }
     }
 }
