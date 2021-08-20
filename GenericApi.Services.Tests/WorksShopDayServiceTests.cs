@@ -24,7 +24,7 @@ namespace GenericApi.Services.Tests
             Day = Core.Enums.WeekDay.MONDAY,
             Mode = Core.Enums.WorkShopDayMode.ON_SITE,
             ModeLocation = "Gps",
-            StartHour = new TimeSpan(10, 0, 0)
+            StartHour = new DateTimeOffset(DateTime.Now)
         };
 
         private readonly WorkShopDay workShopDay2 = new WorkShopDay
@@ -32,7 +32,7 @@ namespace GenericApi.Services.Tests
             Day = Core.Enums.WeekDay.FRIDAY,
             Mode = Core.Enums.WorkShopDayMode.VIRTUAL,
             ModeLocation = "Google Map",
-            StartHour = new TimeSpan(10, 0, 0)
+            StartHour = new DateTimeOffset(DateTime.Now)
         };
 
         public WorksShopDayServiceTests()
@@ -75,7 +75,7 @@ namespace GenericApi.Services.Tests
                 Day = Core.Enums.WeekDay.FRIDAY,
                 Mode = Core.Enums.WorkShopDayMode.VIRTUAL,
                 ModeLocation = "Google Map",
-                StartHour = new TimeSpan(10, 0, 0)
+                StartHour = new DateTimeOffset(DateTime.Now)
             };
 
             //Act
@@ -125,7 +125,7 @@ namespace GenericApi.Services.Tests
                 Day = Core.Enums.WeekDay.WEDNESDAY,
                 Mode = Core.Enums.WorkShopDayMode.VIRTUAL,
                 ModeLocation = "Google Map",
-                StartHour = new TimeSpan(10, 0, 0)
+                StartHour = new DateTimeOffset(DateTime.Now)
             };
 
             //Act

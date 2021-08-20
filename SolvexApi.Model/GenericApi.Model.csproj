@@ -22,8 +22,4 @@
     <ProjectReference Include="..\SolvexApi.Core\GenericApi.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

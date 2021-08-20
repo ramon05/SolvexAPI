@@ -11,8 +11,8 @@ namespace GenericApi.Model.Entities
         public WeekDay Day { get; set; }
         public WorkShopDayMode Mode { get; set; }
         public string ModeLocation { get; set; }
-        public TimeSpan StartHour { get; set; }
-        public TimeSpan? EndHour { get; set; }
+        public DateTimeOffset StartHour { get; set; }
+        public DateTimeOffset? EndHour { get; set; }
         public int WorkShopId { get; set; }
         public virtual WorkShop WorkShop { get; set; }
     }
